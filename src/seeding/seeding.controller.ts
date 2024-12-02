@@ -19,7 +19,7 @@ export class SeedingController {
     @UploadedFiles(
       new ParseFilePipe({
         validators: [
-          new FileTypeValidator({ fileType: 'text/tab-separated-values' }),
+          new FileTypeValidator({ fileType: 'text/csv' }),
         ],
       }),
     )

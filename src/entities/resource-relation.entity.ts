@@ -9,6 +9,9 @@ export class ResourceRelation {
   uuid_resource: string;
 
   @Column()
+  uuid_relation: string;
+
+  @Column()
   relation: string;
 
   @Column()
@@ -19,10 +22,4 @@ export class ResourceRelation {
 
   @Column()
   relation_type: string;
-
-  @Column()
-  data_source: string;
-
-  @Column()
-  data_date: string;
 }

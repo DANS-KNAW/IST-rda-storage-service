@@ -10,7 +10,4 @@ export class URIType {
 
   @Column()
   description: string;
-
-  @Column()
-  last_touch: string;
 }

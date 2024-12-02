@@ -1,4 +1,9 @@
-import { BadRequestException, Inject, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { ClientProxy } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -180,27 +185,27 @@ export class SeedingService {
       // },
     };
 
-    const success = await lastValueFrom(
-      this.msgBrokerClient.send(
-        { cmd: 'create-index' },
-        {
-          alias: this.config.elastic_index,
-          mappings,
-        },
-      ),
-    )
-      .then(() => true)
-      .catch((error: Error) => {
-        this.logger.error(error)
-        if (error.message == 'Alias already exists') {
-          return true;
-        }
-        return false;
-      });
+    // const success = await lastValueFrom(
+    //   this.msgBrokerClient.send(
+    //     { cmd: 'create-index' },
+    //     {
+    //       alias: this.config.elastic_index,
+    //       mappings,
+    //     },
+    //   ),
+    // )
+    //   .then(() => true)
+    //   .catch((error: Error) => {
+    //     this.logger.error(error)
+    //     if (error.message == 'Alias already exists') {
+    //       return true;
+    //     }
+    //     return false;
+    //   });
 
-    if (!success) {
-      throw new BadRequestException('Failed to create index');
-    }
+    // if (!success) {
+    //   throw new BadRequestException('Failed to create index');
+    // }
 
     const start = performance.now();
 
@@ -215,169 +220,169 @@ export class SeedingService {
       totalItems += parsedData.length;
 
       switch (file.originalname) {
-        case 'Disciplines.tsv':
+        case 'discipline.csv':
           await this.saveObjectInOrder(this.disciplineRepository, parsedData);
           break;
-        case 'GORC-attributes.tsv':
+        case 'gorc_attribute.csv':
           await this.saveObjectInOrder(this.gorcAtributeRepository, parsedData);
           break;
-        case 'GORC-Element.tsv':
+        case 'gorc_element.csv':
           await this.saveObjectInOrder(this.gorcElementRepository, parsedData);
           break;
-        case 'Group-Group.tsv':
+        case 'group_group.csv':
           await this.saveObjectInOrder(this.groupGroupRepository, parsedData);
           break;
-        case 'Group-Resource.tsv':
+        case 'group_resource.csv':
           await this.saveObjectInOrder(
             this.groupResourceRepository,
             parsedData,
           );
           break;
-        case 'Individual-GroupAll.tsv':
+        case 'individual_group_all.csv':
           await this.saveObjectInOrder(
             this.individualGroupAllRepository,
             parsedData,
           );
           break;
-        case 'Individual-Group.tsv':
+        case 'individual_group.csv':
           await this.saveObjectInOrder(
             this.individualGroupRepository,
             parsedData,
           );
           break;
-        case 'Individual-Institution.tsv':
+        case 'individual_institution.csv':
           await this.saveObjectInOrder(
             this.individualInstitutionRepository,
             parsedData,
           );
           break;
-        case 'Individual-Member.tsv':
+        case 'individual_member.csv':
           await this.saveObjectInOrder(
             this.individualMemberRepository,
             parsedData,
           );
           break;
-        case 'Individual-Resource.tsv':
+        case 'individual_resource.csv':
           await this.saveObjectInOrder(
             this.individualResourceRepository,
             parsedData,
           );
           break;
-        case 'Individual.tsv':
+        case 'individual.csv':
           await this.saveObjectInOrder(this.individualRepository, parsedData);
           break;
-        case 'Institution-Country.tsv':
+        case 'institution_country.csv':
           await this.saveObjectInOrder(
             this.institutionCountryRepository,
             parsedData,
           );
           break;
-        case 'Institution-InstitutionRole.tsv':
+        case 'institution_institution_role.csv':
           await this.saveObjectInOrder(
             this.institutionInstitutionRoleRepository,
             parsedData,
           );
           break;
-        case 'Institution-OrganisationType.tsv':
+        case 'institution_organisation_type.csv':
           await this.saveObjectInOrder(
             this.institutionOrganisationTypeRepository,
             parsedData,
           );
           break;
-        case 'Institution_Roles.tsv':
+        case 'institution_role.csv':
           await this.saveObjectInOrder(
             this.institutionRoleRepository,
             parsedData,
           );
           break;
-        case 'Institutions.tsv':
+        case 'institution.csv':
           await this.saveObjectInOrder(this.institutionRepository, parsedData);
           break;
-        case 'InterestGroup.tsv':
+        case 'interest_group.csv':
           await this.saveObjectInOrder(
             this.interestGroupRepository,
             parsedData,
           );
           break;
-        case 'OrgType.tsv':
+        case 'org_type.csv':
           await this.saveObjectInOrder(this.orgTypeRepository, parsedData);
           break;
-        case 'Keywords.tsv':
+        case 'keyword.csv':
           await this.saveObjectInOrder(this.keywordRepository, parsedData);
           break;
-        case 'Pathway.tsv':
+        case 'pathway.csv':
           await this.saveObjectInOrder(this.pathwayRepository, parsedData);
           break;
-        case 'Relation.tsv':
+        case 'relation.csv':
           await this.saveObjectInOrder(this.relationRepository, parsedData);
           break;
-        case 'Resource-Disciplines.tsv':
+        case 'resource_discipline.csv':
           await this.saveObjectInOrder(
             this.resourceDisciplineRepository,
             parsedData,
           );
           break;
-        case 'Resource-GORC-Attribute.tsv':
+        case 'resource_gorc_attribute.csv':
           await this.saveObjectInOrder(
             this.resourceGORCAttributeRepository,
             parsedData,
           );
           break;
-        case 'Resource-GORC-Element.tsv':
+        case 'resource_gorc_element.csv':
           await this.saveObjectInOrder(
             this.resourceGORCElementRepository,
             parsedData,
           );
           break;
-        case 'Resource-Keywords.tsv':
+        case 'resource_keyword.csv':
           await this.saveObjectInOrder(
             this.resourceKeywordRepository,
             parsedData,
           );
           break;
-        case 'Resource-Pathway.tsv':
+        case 'resource_pathway.csv':
           await this.saveObjectInOrder(
             this.resourcePathwayRepository,
             parsedData,
           );
           break;
-        case 'Resource-Relation.tsv':
+        case 'resource_relation.csv':
           await this.saveObjectInOrder(
             this.resourceRelationRepository,
             parsedData,
           );
           break;
-        case 'Resource_Rights.tsv':
+        case 'resource_right.csv':
           await this.saveObjectInOrder(
             this.resourceRightRepository,
             parsedData,
           );
           break;
-        case 'Resource-Workflow.tsv':
+        case 'resource_workflow.csv':
           await this.saveObjectInOrder(
             this.resourceWorkflowRepository,
             parsedData,
           );
           break;
-        case 'Resource.tsv':
+        case 'resource.csv':
           await this.saveObjectInOrder(this.resourceRepository, parsedData);
           break;
-        case 'Rights.tsv':
+        case 'right.csv':
           await this.saveObjectInOrder(this.rightRepository, parsedData);
           break;
-        case 'Subject-Resource.tsv':
+        case 'subject_resource.csv':
           await this.saveObjectInOrder(
             this.subjectResourceRepository,
             parsedData,
           );
           break;
-        case 'URI_Type.tsv':
+        case 'uri_type.csv':
           await this.saveObjectInOrder(this.uriTypeRepository, parsedData);
           break;
-        case 'Workflow.tsv':
+        case 'workflow.csv':
           await this.saveObjectInOrder(this.workflowRepository, parsedData);
           break;
-        case 'WorkingGroup.tsv':
+        case 'working_group.csv':
           await this.saveObjectInOrder(this.workingGroupRepository, parsedData);
           break;
         default:
@@ -387,16 +392,16 @@ export class SeedingService {
 
     this.logger.log('Finished ingesting files');
 
-    const documents = await this.buildElasticDocument();
+    // const documents = await this.buildElasticDocument();
 
-    for (const document of documents) {
-      await lastValueFrom(
-        this.msgBrokerClient.send(
-          { cmd: 'index-document' },
-          { alias: this.config.elastic_index, body: document, customId: 'uuid_rda' },
-        ),
-      );
-    }
+    // for (const document of documents) {
+    //   await lastValueFrom(
+    //     this.msgBrokerClient.send(
+    //       { cmd: 'index-document' },
+    //       { alias: this.config.elastic_index, body: document, customId: 'uuid_rda' },
+    //     ),
+    //   );
+    // }
 
     const end = performance.now();
     return {
@@ -618,8 +623,8 @@ export class SeedingService {
         const mapToGroups = (group: IndividualGroup | IndividualGroupAll) => ({
           uuid_group: group.uuid_group,
           uuid_individual: group.uuid_individual,
-          member_type:
-            'member_type' in group ? group.member_type : group.relation,
+          // member_type:
+          //   'member_type' in group ? group.member_type : group.relation,
         });
 
         const groups = [...individualGroups, ...individualGroupAll].map(
@@ -635,7 +640,7 @@ export class SeedingService {
           if (interestGroup != null) {
             memberOfGroups.push({
               ...interestGroup,
-              member_type: group.member_type,
+              // member_type: group.member_type,
             });
             continue;
           }
@@ -650,7 +655,7 @@ export class SeedingService {
 
           memberOfGroups.push({
             ...workingGroup,
-            member_type: group.member_type,
+            // member_type: group.member_type,
           });
         }
 
@@ -806,18 +811,18 @@ export class SeedingService {
 
   private preprocessBuffer(buffer: Buffer): Buffer {
     const fileContent = buffer.toString('utf-8');
-    const escapedContent = fileContent.replace(/"/g, '\\"');
-    return Buffer.from(escapedContent, 'utf-8');
+    // const escapedContent = fileContent.replace(/"/g, '\\"');
+    return Buffer.from(fileContent, 'utf-8');
   }
 
   private parseCsvBuffer(buffer: Buffer): Promise<Record<string, string>[]> {
     return new Promise((resolve, reject) => {
       const records: Record<string, string>[] = [];
       const parser = parse({
-        columns: true,
-        delimiter: '\t',
-        quote: null,
-        escape: '\\',
+        columns: true, // Automatically extract column names from the first row
+        delimiter: ',', // Standard CSV delimiter
+        quote: '"', // Standard quote character
+        escape: '"', // Escape character for quotes (standard is also a double quote)
       });
 
       parser.on('data', (row) => {

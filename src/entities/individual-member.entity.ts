@@ -8,6 +8,12 @@ export class IndividualMember {
   @Column()
   combined_name: string;
 
+  @Column()
+  relation_uuid: string;
+
+  @Column()
+  relation: string;
+
   @PrimaryColumn()
   uuid_institution: string;
 

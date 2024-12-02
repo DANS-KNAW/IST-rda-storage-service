@@ -9,7 +9,10 @@ export class IndividualGroupAll {
   group: string;
 
   @Column()
-  relation: string;
+  memberNode: string;
+
+  @Column()
+  memberNodeBackup: string;
 
   @PrimaryColumn()
   uuid_individual: string;

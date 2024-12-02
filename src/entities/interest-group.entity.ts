@@ -19,4 +19,10 @@ export class InterestGroup {
 
   @Column()
   url: string;
+
+  @Column()
+  status: string;
+
+  @Column()
+  sub_status: string;
 }

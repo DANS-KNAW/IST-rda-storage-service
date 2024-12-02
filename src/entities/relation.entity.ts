@@ -19,7 +19,4 @@ export class Relation {
 
   @Column()
   description: string;
-
-  @Column()
-  last_update: string;
 }

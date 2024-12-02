@@ -8,9 +8,6 @@ export class Resource {
   @Column({ nullable: true })
   uuid_link: string;
 
-  @Column()
-  uuid_uri_type: string;
-
   @PrimaryColumn()
   uuid_rda: string;
 
@@ -18,13 +15,19 @@ export class Resource {
   title: string;
 
   @Column()
-  notes: string;
+  alternateTitle: string;
 
   @Column()
   uri: string;
 
+  @Column()
+  backupUri: string;
+
   @Column({ nullable: true })
   uri2: string;
+
+  @Column({ nullable: true })
+  backupUri2: string;
 
   @Column({ nullable: true })
   pid_lod_type: string;
@@ -50,9 +53,15 @@ export class Resource {
   @Column({ nullable: true })
   card_url: string;
 
-  @Column()
+  @Column({ nullable: true })
   source: string;
 
   @Column({ nullable: true })
   fragment: string;
+
+  @Column({ nullable: true })
+  uuid_uri_type: string;
+
+  @Column({ nullable: true })
+  notes: string;
 }

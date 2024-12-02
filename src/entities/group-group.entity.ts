@@ -25,4 +25,7 @@ export class GroupGroup {
 
   @Column()
   Description_URL: string;
+
+  @Column()
+  Description_URL_Backup: string;
 }

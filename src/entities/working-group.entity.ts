@@ -19,4 +19,13 @@ export class WorkingGroup {
 
   @Column()
   url: string;
+
+  @Column()
+  backup_url: string;
+
+  @Column()
+  status: string;
+
+  @Column()
+  sub_status: string;
 }

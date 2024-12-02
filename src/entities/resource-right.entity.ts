@@ -6,16 +6,13 @@ export class ResourceRight {
   uuid_resource: string;
 
   @Column()
-  relation_uuid: string;
+  uuid_relation: string;
 
   @Column()
   relation: string;
 
   @PrimaryColumn()
   lod_pid: string;
-
-  @Column()
-  status: string;
 
   @Column()
   type: string;
